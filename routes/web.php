@@ -18,6 +18,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [DashboardController::class, 'index']);
 
+Route::post('/idea', [DashboardController::class, 'index'])->name('idea.crate');
+
 Route::get('/terms', function(){
     return view('terms');
 });
