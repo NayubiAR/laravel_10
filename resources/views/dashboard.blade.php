@@ -42,7 +42,7 @@
                 <hr>
                 @foreach($ideas as $idea)
                 <div class="mt-3">
-                    @include('shared.card')       
+                    @include('shared.card')
                 </div>
                 @endforeach
             </div>
