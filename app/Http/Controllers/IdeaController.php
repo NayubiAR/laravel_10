@@ -9,6 +9,15 @@ class IdeaController extends Controller
 {
     public function store(){
 
+        request()->validate([
+            "idea"=> "required|min:5|max:240",
+        ],
+        [
+            'idea.required' => 'Ide wajib diisi.',
+            'idea.min' => 'Ide harus memiliki minimal :min huruf.',
+            'idea.max' => 'Ide tidak boleh lebih dari :max huruf.',
+        ]);
+
         $idea = Idea::create(
             [
             'content' => request()->get('idea',''),
