@@ -14,12 +14,13 @@ class IdeaController extends Controller
         // Dan akan membuatkan array asosiatif
         return view('ideas.show', compact('idea'));
     }
+
     public function store()
     {
 
         request()->validate(
             [
-                "idea" => "required|min:5|max:240",
+                'content' => 'required|min:5|max:240',
             ],
             [
                 'idea.required' => 'Ide wajib diisi.',
@@ -30,7 +31,7 @@ class IdeaController extends Controller
 
         $idea = Idea::create(
             [
-                'content' => request()->get('idea', ''),
+                'content' => request()->get('content', ''),
             ]
         );
 
@@ -43,5 +44,26 @@ class IdeaController extends Controller
         $id->delete();
 
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully!');
+    }
+
+    public function edit(Idea $idea)
+    {
+        // Dengan menggunakan compact dapat mempersingkat code 'idea' => $idea yang mana bertujuan untuk mencari variable yang sama dari compact
+        // Dan akan membuatkan array asosiatif
+        $editing = true;
+        return view('ideas.show', compact('idea', 'editing'));
+    }
+
+    public function update(Idea $idea)
+    {
+        request()->validate([
+            'content' => 'required|min:5|max:240'
+        ]);
+
+        // setelah content diisi dengan value kosong karena untuk isian default nya menjadi kosong
+        $idea->content = request()->get('content', '');
+        $idea->save();
+
+        return redirect()->route('ideas.show', $idea->id)->with('success', "Idea updated successfully!");
     }
 }
