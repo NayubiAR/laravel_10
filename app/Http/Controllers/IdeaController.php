@@ -18,7 +18,7 @@ class IdeaController extends Controller
     public function store()
     {
 
-        request()->validate(
+        $requested = request()->validate(
             [
                 'content' => 'required|min:5|max:240',
             ],
@@ -29,19 +29,15 @@ class IdeaController extends Controller
             ]
         );
 
-        $idea = Idea::create(
-            [
-                'content' => request()->get('content', ''),
-            ]
-        );
+        Idea::create($requested);
 
         return redirect()->route('dashboard')->with('success', 'Idea Created Successfully!');
     }
 
-    public function destroy(Idea $id)
+    public function destroy(Idea $idea)
     {
 
-        $id->delete();
+        $idea->delete();
 
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully!');
     }
@@ -56,13 +52,18 @@ class IdeaController extends Controller
 
     public function update(Idea $idea)
     {
-        request()->validate([
-            'content' => 'required|min:5|max:240'
-        ]);
+        $requested = request()->validate(
+            [
+                'content' => 'required|min:5|max:240',
+            ],
+            [
+                'idea.required' => 'Ide wajib diisi.',
+                'idea.min' => 'Ide harus memiliki minimal :min huruf.',
+                'idea.max' => 'Ide tidak boleh lebih dari :max huruf.',
+            ]
+        );
 
-        // setelah content diisi dengan value kosong karena untuk isian default nya menjadi kosong
-        $idea->content = request()->get('content', '');
-        $idea->save();
+        $idea->update($requested);
 
         return redirect()->route('ideas.show', $idea->id)->with('success', "Idea updated successfully!");
     }
