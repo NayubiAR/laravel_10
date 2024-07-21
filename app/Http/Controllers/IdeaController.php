@@ -20,7 +20,7 @@ class IdeaController extends Controller
 
         $requested = request()->validate(
             [
-                'content' => 'required|min:5|max:240',
+                'content' => 'required|min:4|max:240',
             ],
             [
                 'idea.required' => 'Ide wajib diisi.',
@@ -54,7 +54,7 @@ class IdeaController extends Controller
     {
         $requested = request()->validate(
             [
-                'content' => 'required|min:5|max:240',
+                'content' => 'required|min:4|max:240',
             ],
             [
                 'idea.required' => 'Ide wajib diisi.',

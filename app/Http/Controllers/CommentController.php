@@ -10,6 +10,7 @@ class CommentController extends Controller
 {
     public function store(Idea $idea)
     {
+
         $comment = new Comment();
         $comment->idea_id = $idea->id;
         $comment->content = request()->get('content');
