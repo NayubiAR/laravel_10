@@ -18,7 +18,7 @@ class IdeaController extends Controller
     public function store()
     {
 
-        $requested = request()->validate(
+        $validated = request()->validate(
             [
                 'content' => 'required|min:4|max:240',
             ],
@@ -29,13 +29,20 @@ class IdeaController extends Controller
             ]
         );
 
-        Idea::create($requested);
+        // Untuk mengisi yang login
+        $validated['user_id'] = auth()->id();
+
+        // Menyimpan kedalam database
+        Idea::create($validated);
 
         return redirect()->route('dashboard')->with('success', 'Idea Created Successfully!');
     }
 
     public function destroy(Idea $idea)
     {
+        if (auth()->id() !== $idea->user_id) {
+            abort(404, "Sorry you not allow to open this page");
+        }
 
         $idea->delete();
 
@@ -46,12 +53,19 @@ class IdeaController extends Controller
     {
         // Dengan menggunakan compact dapat mempersingkat code 'idea' => $idea yang mana bertujuan untuk mencari variable yang sama dari compact
         // Dan akan membuatkan array asosiatif
+        if (auth()->id() !== $idea->user_id) {
+            abort(404, "Sorry you not allow to open this page");
+        }
         $editing = true;
         return view('ideas.show', compact('idea', 'editing'));
     }
 
     public function update(Idea $idea)
     {
+        if (auth()->id() !== $idea->user_id) {
+            abort(404, "Sorry you not allow to open this page");
+        }
+
         $requested = request()->validate(
             [
                 'content' => 'required|min:4|max:240',
