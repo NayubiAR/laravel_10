@@ -11,16 +11,16 @@
             <ul class="navbar-nav">
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/login">Login</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
+                        <a class="nav-link" href="{{ route('register') }}">Register</a>
                     </li>
                 @endguest
 
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile">Hello {{ Auth::user()->name }}</a>
+                        <a class="nav-link" href="{{ route('profile') }}">Hello {{ Auth::user()->name }}</a>
                     </li>
 
                     <li class="nav-item">
