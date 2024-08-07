@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\RegisterEmail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -21,13 +24,16 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:8',
         ]);
 
-        User::create(
+        $user = User::create(
             [
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
             ]
         );
+
+        // Bisa tambahkan method cc dan bcc
+        Mail::to($user->email)->send(new RegisterEmail($user));
 
         return redirect()->route('dashboard')->with('success', 'Account created successfully!');
     }
@@ -44,25 +50,26 @@ class AuthController extends Controller
             'password' => 'required|min:8',
         ]);
 
-        if(auth()->attempt($validated)) {
+        if (auth()->attempt($validated)) {
 
             // Membuat session baru
             request()->session()->regenerate();
 
-            return redirect()->route('dashboard')->with('success','Logged in successfully');
+            return redirect()->route('dashboard')->with('success', 'Logged in successfully');
         }
 
         return redirect()->route('login')->withErrors([
-            'email'=> "No matching user found with the provided email and password",
+            'email' => "No matching user found with the provided email and password",
         ]);
     }
 
-    public function logout(){
+    public function logout()
+    {
         auth()->logout();
 
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect()->route("dashboard")->with("success","Logout Successfully");
+        return redirect()->route("dashboard")->with("success", "Logout Successfully");
     }
 }
