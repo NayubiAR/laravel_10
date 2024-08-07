@@ -44,16 +44,36 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function ideas(){
+    public function ideas()
+    {
         return $this->hasMany(Idea::class)->latest();
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class)->latest();
     }
 
-    public function getImageURL(){
-        if($this->image){
+    public function followings()
+    {
+        // Many to many relationship
+        return $this->belongsToMany(User::class, 'follower_user', 'follower_id', 'user_id')->withTimestamps();
+    }
+
+    public function followers()
+    {
+        // Many to many relationship
+        return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id')->withTimestamps();
+    }
+
+    public function follows(User $users)
+    {
+        // Mengambil foolowings relationship dari followings
+        return $this->followings()->where('user_id', $users->id)->exists();
+    }
+    public function getImageURL()
+    {
+        if ($this->image) {
             return url('storage/' . $this->image);
         }
         return "https://api.dicebear.com/6.x/fun-emoji/svg?seed={$this->name}";

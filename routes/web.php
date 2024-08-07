@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,8 @@ Route::resource('users', UserController::class)->only(['show', 'edit', 'update']
 
 Route::get('profile', [UserController::class, 'profile'])->middleware('auth')->name('profile');
 
+Route::post('users/{user}/follow', [FollowerController::class, 'follow'])->middleware('auth')->name('users.follow');
+Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])->middleware('auth')->name('users.unfollow');
 // ------------------------------------------------- Resources Routing ----------------------------------------------------
 
 // Menggunakan resources routing yang dimana langsung membuat kan 7 method dari laravel berikut yang dibuat oleh resources:
