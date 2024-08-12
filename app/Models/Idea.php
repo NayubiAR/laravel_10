@@ -9,6 +9,12 @@ class Idea extends Model
 {
     use HasFactory;
 
+    // ":" Digunakan agar ketika menggunakan query nya yang dipanggil hanya field tertentu saja
+    // Contoh query tanpa menggunakan ":"
+    // select * from `*nama database` where `*nama database` . `*nama field` in (2, 3)
+    // Setelah menggunakan
+    // select `id`, `name`, `image` from `users` where `users`.`id` in (2, 3)
+    protected $with = ['user:id,name,image', 'comments.user:id,name,image'];
     protected $guarded = [
         "id",
         "created_at",
@@ -24,7 +30,8 @@ class Idea extends Model
         return $this->hasMany(Comment::class, 'idea_id', 'id');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }
