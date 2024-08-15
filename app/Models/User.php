@@ -68,9 +68,21 @@ class User extends Authenticatable
 
     public function follows(User $users)
     {
-        // Mengambil foolowings relationship dari followings
+        // Mengambil followings relationship dari model user
         return $this->followings()->where('user_id', $users->id)->exists();
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Idea::class, 'idea_like');
+    }
+
+    public function likesIdea(Idea $idea)
+    {
+        // Mengambil likes relationship dari model idea
+        return $this->likes()->where('idea_id', $idea->id)->exists();
+    }
+
     public function getImageURL()
     {
         if ($this->image) {

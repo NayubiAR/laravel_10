@@ -18,7 +18,8 @@ class Idea extends Model
     protected $guarded = [
         "id",
         "created_at",
-        "updated_at"
+        "updated_at",
+        "like"
     ];
     // protected $fillable = [
     //     'content',
@@ -33,5 +34,11 @@ class Idea extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    // Jika nama user
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'idea_like');
     }
 }

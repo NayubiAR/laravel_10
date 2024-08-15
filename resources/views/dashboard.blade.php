@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layout.app')
 
 @section('content')
 <div class="row">
@@ -7,13 +7,13 @@
     </div>
     <div class="col-6">
         @include('shared.success_message')
-        @include('shared.submit')
+        @include('ideas.shared.submit')
         <hr>
         {{-- Disini menggunakan loop forelse yang dimana jika loop ini kosong mangka akan mengarah ke bagian empty
             Bisa juga menggunakan loop foreach namun harus menggunakan if else jika ingin data kosong diarah kan ke else --}}
         @forelse ($ideas as $idea)
         <div class="mt-3">
-            @include('shared.card')
+            @include('ideas.shared.card')
         </div>
         @empty
         <p class="text-center mt-4">No result found.</p>
