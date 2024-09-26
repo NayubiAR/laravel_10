@@ -11,10 +11,13 @@
                     <span>Home</span></a>
             </li>
             <li class="nav-item">
+<<<<<<< HEAD
                 <a class="{{ (Route::is('feed')) ? 'text-white bg-primary rounded' : '' }} nav-link" href="{{ route('feed') }}">
                     <span>Feed</span></a>
             </li>
             <li class="nav-item">
+=======
+>>>>>>> d396b91257532fbd839408e4a71c7c89206b9bc6
                 <a class="{{ (Route::is('terms')) ? 'text-white bg-primary rounded' : '' }} nav-link" href="{{ route('terms') }}">
                     <span>Terms</span></a>
             </li>

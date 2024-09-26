@@ -21,7 +21,11 @@ class AuthController extends Controller
         $validated = request()->validate([
             'name' => 'required|min:3|max:40',
             'email' => 'required|email|unique:users,email',
+<<<<<<< HEAD
             'password' => 'required|confirmed|min:5',
+=======
+            'password' => 'required|confirmed|min:8',
+>>>>>>> d396b91257532fbd839408e4a71c7c89206b9bc6
         ]);
 
         $user = User::create(
@@ -47,7 +51,11 @@ class AuthController extends Controller
     {
         $validated = request()->validate([
             'email' => 'required|email',
+<<<<<<< HEAD
             'password' => 'required|min:5',
+=======
+            'password' => 'required|min:8',
+>>>>>>> d396b91257532fbd839408e4a71c7c89206b9bc6
         ]);
 
         if (auth()->attempt($validated)) {

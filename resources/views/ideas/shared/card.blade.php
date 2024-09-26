@@ -52,11 +52,18 @@
             @include('ideas.shared.like_button')
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
+<<<<<<< HEAD
                 {{-- toDateString digunakan untuk menampilkan tanggal dan waktu --}}
                 {{-- diffForHumans digunakan untuk menampilkan berapa lama sebuah data terbuat--}}
                     {{ $idea->created_at->diffForHumans() }} </span>
             </div>
         </div>
         @include('ideas.shared.comment_box')
+=======
+                    {{ $idea->created_at }} </span>
+            </div>
+        </div>
+        @include('shared.comment_box')
+>>>>>>> d396b91257532fbd839408e4a71c7c89206b9bc6
     </div>
 </div>

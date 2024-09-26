@@ -17,4 +17,8 @@
         @include('shared.follow_box')
     </div>
 </div>
+<<<<<<< HEAD
 @endsection 
+=======
+@endsection
+>>>>>>> d396b91257532fbd839408e4a71c7c89206b9bc6

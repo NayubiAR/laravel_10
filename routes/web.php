@@ -1,7 +1,10 @@
 <?php
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
+<<<<<<< HEAD
 use App\Http\Controllers\FeedController;
+=======
+>>>>>>> d396b91257532fbd839408e4a71c7c89206b9bc6
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\IdeaLikeController;
@@ -19,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
 
 //-------------------------- Grouping Route ---------------------------
 // Route::group(['prefix' => 'ideas/', 'as' => 'ideas.'], function () {
@@ -27,6 +31,17 @@ use Illuminate\Support\Facades\Route;
 
 //     Route::group(['middleware' => ['auth']], function () {
     
+=======
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+//-------------------------- Grouping Route ---------------------------
+// Route::group(['prefix' => 'ideas/', 'as' => 'ideas.'], function () {
+
+//     Route::get('/{idea}', [IdeaController::class, 'show'])->name('show');
+
+//     Route::group(['middleware' => ['auth']], function () {
+
+>>>>>>> d396b91257532fbd839408e4a71c7c89206b9bc6
 //         Route::post('', [IdeaController::class, 'store'])->name('store');
 
 //         Route::get('/{idea}/edit', [IdeaController::class, 'edit'])->name('edit');
@@ -39,7 +54,10 @@ use Illuminate\Support\Facades\Route;
 
 //     });
 // });
+<<<<<<< HEAD
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+=======
+>>>>>>> d396b91257532fbd839408e4a71c7c89206b9bc6
 
 Route::resource('ideas', IdeaController::class)->except(['index', 'create', 'show'])->middleware('auth');
 
@@ -57,9 +75,12 @@ Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])->m
 
 Route::post('ideas/{idea}/like', [IdeaLikeController::class, 'like'])->middleware('auth')->name('ideas.like');
 Route::post('ideas/{idea}/unlike', [IdeaLikeController::class, 'unlike'])->middleware('auth')->name('ideas.unlike');
+<<<<<<< HEAD
 
 //Untuk route feed tidak perlu men define method nya karena laravel akan langsung mencarikan __invoke nya
 Route::get('/feed',  FeedController::class)->middleware('auth')->name('feed');
+=======
+>>>>>>> d396b91257532fbd839408e4a71c7c89206b9bc6
 // ------------------------------------------------- Resources Routing ----------------------------------------------------
 
 // Menggunakan resources routing yang dimana langsung membuat kan 7 method dari laravel berikut yang dibuat oleh resources:
